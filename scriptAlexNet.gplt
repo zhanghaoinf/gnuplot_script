@@ -1,0 +1,37 @@
+# Illustrate reading plot labels from column head in datafile
+#
+set term postscript enhanced color
+set terminal epscairo enhanced color size 10in,12in font "Arial,30"
+
+
+set output "AlexNet.eps"
+set multiplot layout 3,1
+
+set style line 5 lc rgb '#0060ad' lt 1 lw 10 pt 10 pi -1 ps 1.5
+set pointintervalbox 3
+
+
+#set label 1 "Generate plot labels from first row in each column"
+#set label 1 at graph 0.02, 0.85 tc lt 3
+#set label 2 "Generate x-axis labels from first column in each row"
+#set label 2 at graph 0.02, 0.80 tc lt 3
+
+set style data linespoints
+#set ylabel "similarity"
+#set xlabel "layer"
+set auto x
+set grid
+set xtic scale 0
+#
+set key autotitle columnhead
+set title "AlexNet"
+set yrange [0.4:0.7]
+plot 'alexnet.data' using 2:xticlabel(1) index 0 ls 5
+set title "VGG-19-Net"
+set yrange [0.35:0.95]
+set xtics rotate by -60
+plot 'vgg.data' using 2:xticlabel(1) index 0 ls 5
+set title "Deep-ResNet-50"
+set yrange [0.4:1]
+set xtics rotate by -60
+plot 'drn.data' using 2:xticlabel(1) index 0 ls 5

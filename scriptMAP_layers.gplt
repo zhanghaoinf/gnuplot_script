@@ -1,0 +1,25 @@
+# Illustrate reading plot labels from column head in datafile
+#
+set term postscript enhanced color
+set output "mAP_vs_layers.eps"
+set title "Deep-ResNet-50: mAP VS Layer "
+set style line 1 lc rgb '#008000' lt 1 lw 2 pt 6 pi -1 ps 1.5
+set style line 5 lc rgb '#8B0000' lt 1 lw 2 pt 7 pi -1 ps 1.5
+set pointintervalbox 3
+
+
+#set label 1 "Generate plot labels from first row in each column"
+#set label 1 at graph 0.02, 0.85 tc lt 3
+#set label 2 "Generate x-axis labels from first column in each row"
+#set label 2 at graph 0.02, 0.80 tc lt 3
+
+set grid
+set style data linespoints
+set ylabel "mAP"
+set xlabel "layer"
+set yrange [0:0.5]
+set xtics rotate by -60
+#
+set key autotitle columnhead
+plot '10Ex.data' using 3:xticlabel(1) index 0 ls 1, \
+	"10Ex.data" using 2:xticlabel(1) index 0 ls 5
